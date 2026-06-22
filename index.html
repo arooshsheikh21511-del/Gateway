@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Website Offline</title>
+
+    <style>
+
+        body {
+            background-color: #071a33;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 120px;
+        }
+
+        .box {
+            background-color: #0d2a4d;
+            width: 400px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px black;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        h2 {
+            color: #5da9ff;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="box">
+
+    <h1 id="status">Checking...</h1>
+
+    <p id="message"></p>
+
+    <h2>Opening Hours</h2>
+
+    <p>3:00 PM - 6:00 PM</p>
+
+</div>
+
+
+<script>
+
+let now = new Date();
+let hour = now.getHours();
+
+let status = document.getElementById("status");
+let message = document.getElementById("message");
+
+
+if (hour >= 15 && hour < 18) {
+
+     window.location.href = "YOUR_WEBSITE_LINK";
+
+}
+
+else {
+
+    status.innerHTML = "🚧 Website is Closed";
+
+
+    let opening = new Date();
+
+    opening.setHours(15,0,0,0);
+
+
+    if (now >= opening) {
+        opening.setDate(opening.getDate() + 1);
+    }
+
+
+    let difference = opening - now;
+
+
+    let hours = Math.floor(
+        difference / (1000 * 60 * 60)
+    );
+
+    let minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+    );
+
+
+    message.innerHTML =
+    "Opening in " + hours + " hours and " + minutes + " minutes.";
+
+}
+
+</script>
+
+
+</body>
+
+</html>
